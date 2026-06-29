@@ -1,8 +1,0 @@
-COLOQUE AQUI O kiosk.html QUE ESTÁ NO TABLET (o "live", com prompt de PIN).
-
-Não use a versão antiga do kiosk — ela não tem o PIN por empresa e quebraria
-as batidas contra o backend live. Quando tiver o arquivo certo, salve-o nesta
-pasta como `kiosk.html` e apague este arquivo .txt.
-
-Sem o kiosk.html aqui, o container ainda serve o dashboard e a landing
-normalmente; só a rota /kiosk.html vai dar 404 até você adicioná-lo.
