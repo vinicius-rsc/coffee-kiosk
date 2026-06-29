@@ -1,0 +1,1101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Credits admin · Coffee kiosk</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.5.0/dist/tabler-icons.min.css">
+
+<style>
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f5f5f3;
+  --bg-tertiary: #ebebe8;
+  --text-primary: #1a1a1a;
+  --text-secondary: #6b6b6b;
+  --text-tertiary: #999;
+  --border: #e5e5e5;
+  --border-strong: #ccc;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #262626;
+    --bg-tertiary: #333;
+    --text-primary: #f5f5f3;
+    --text-secondary: #a0a0a0;
+    --text-tertiary: #707070;
+    --border: #333;
+    --border-strong: #555;
+  }
+}
+
+* { box-sizing: border-box; }
+html, body {
+  margin: 0;
+  background: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  font-feature-settings: 'cv11', 'ss01';
+  -webkit-font-smoothing: antialiased;
+  min-height: 100vh;
+}
+
+.admin {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 24px;
+  position: relative;
+}
+
+.admin-header {
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 0.5px solid var(--border);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.admin-title {
+  font-size: 28px;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.admin-title i { color: var(--text-secondary); font-size: 26px; }
+.admin-sub {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-top: 4px;
+  margin-left: 36px;
+}
+.live-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  padding: 6px 12px 6px 10px;
+  background: color-mix(in srgb, #1D9E75 12%, var(--bg-secondary));
+  border: 0.5px solid color-mix(in srgb, #1D9E75 30%, transparent);
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #1D9E75;
+}
+.live-pill.error {
+  background: color-mix(in srgb, #DC2626 12%, var(--bg-secondary));
+  border-color: color-mix(in srgb, #DC2626 30%, transparent);
+  color: #DC2626;
+}
+.live-dot {
+  width: 7px; height: 7px; border-radius: 50%; background: currentColor; position: relative;
+}
+.live-dot::after {
+  content: ''; position: absolute; inset: -3px; border-radius: 50%;
+  background: currentColor; opacity: 0.3;
+  animation: livePulse 1.8s ease-out infinite;
+}
+@keyframes livePulse { 0% { transform: scale(0.6); opacity: 0.5; } 100% { transform: scale(2.2); opacity: 0; } }
+
+.admin-kpis {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 8px;
+  margin-bottom: 1.5rem;
+}
+@media (max-width: 700px) { .admin-kpis { grid-template-columns: repeat(2, 1fr); } }
+.kpi-card {
+  background: var(--bg-secondary);
+  border-radius: 12px;
+  padding: 12px 14px;
+  min-width: 0;
+}
+.kpi-label {
+  font-size: 11px; color: var(--text-secondary); font-weight: 500;
+  letter-spacing: 0.4px; text-transform: uppercase; margin-bottom: 4px;
+}
+.kpi-value {
+  font-size: 28px; font-weight: 700; font-variant-numeric: tabular-nums;
+  letter-spacing: -1px; line-height: 1.05;
+}
+.kpi-sub { font-size: 11px; color: var(--text-tertiary); margin-top: 3px; }
+.kpi-card.warning { background: color-mix(in srgb, #EF9F27 14%, var(--bg-secondary)); }
+.kpi-card.warning .kpi-value { color: #BA7517; }
+.kpi-card.danger { background: color-mix(in srgb, #DC2626 14%, var(--bg-secondary)); }
+.kpi-card.danger .kpi-value { color: #DC2626; }
+
+.admin-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  align-items: start;
+}
+@media (max-width: 600px) { .admin-grid { grid-template-columns: 1fr; } }
+
+.account-card {
+  --acc-color: #888;
+  border: 0.5px solid var(--border);
+  border-radius: 14px;
+  padding: 14px 16px;
+  background: linear-gradient(135deg, color-mix(in srgb, var(--acc-color) 5%, transparent), transparent 70%), var(--bg-primary);
+  display: flex; flex-direction: column; gap: 8px;
+  transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  min-width: 0;
+}
+.account-card.low {
+  background: linear-gradient(135deg, color-mix(in srgb, #EF9F27 12%, transparent), transparent 75%), var(--bg-primary);
+  border-color: color-mix(in srgb, #EF9F27 35%, var(--border));
+}
+.account-card.even {
+  background: linear-gradient(135deg, color-mix(in srgb, #6B7280 10%, transparent), transparent 75%), var(--bg-primary);
+}
+.account-card.owes {
+  background: linear-gradient(135deg, color-mix(in srgb, #DC2626 14%, transparent), transparent 75%), var(--bg-primary);
+  border-color: color-mix(in srgb, #DC2626 45%, var(--border));
+}
+.account-card.editing {
+  background: var(--bg-primary);
+  border-color: color-mix(in srgb, var(--acc-color) 50%, var(--border));
+  box-shadow: 0 6px 18px color-mix(in srgb, var(--acc-color) 20%, transparent);
+}
+
+.account-header { display: flex; align-items: center; gap: 8px; }
+.account-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--acc-color); flex-shrink: 0; }
+.account-name {
+  font-size: 14px; font-weight: 500; letter-spacing: -0.2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+  min-width: 0; flex: 1;
+}
+.account-status {
+  font-size: 10px; font-weight: 700; letter-spacing: 0.6px;
+  text-transform: uppercase; padding: 2px 7px; border-radius: 4px; flex-shrink: 0;
+}
+.account-status.low { background: rgba(239, 159, 39, 0.18); color: #BA7517; }
+.account-status.even { background: rgba(107, 114, 128, 0.2); color: #4B5563; }
+.account-status.owes { background: rgba(220, 38, 38, 0.18); color: #DC2626; }
+
+.account-balance { display: flex; align-items: baseline; gap: 6px; margin-top: 2px; }
+.account-balance-num {
+  font-size: 32px; font-weight: 700; letter-spacing: -1.3px;
+  font-variant-numeric: tabular-nums; line-height: 1;
+}
+.account-balance-num.owes { color: #DC2626; }
+.account-balance-label { font-size: 12px; color: var(--text-secondary); font-weight: 500; }
+
+.progress-track {
+  width: 100%; height: 4px; background: var(--bg-secondary);
+  border-radius: 999px; overflow: hidden; margin-top: 4px;
+}
+.progress-fill {
+  height: 100%; background: var(--acc-color); border-radius: 999px;
+  transition: width 0.4s ease;
+}
+.progress-fill.warning { background: #EF9F27; }
+.progress-fill.danger { background: #DC2626; }
+
+.account-meta {
+  font-size: 11px; color: var(--text-tertiary);
+  display: flex; justify-content: space-between; margin-top: 2px; gap: 6px;
+}
+.account-meta strong { color: var(--text-secondary); font-weight: 500; }
+
+.topup-btn {
+  margin-top: 6px; font-size: 12px; font-weight: 600;
+  color: var(--text-primary); background: var(--bg-primary);
+  border: 0.5px solid var(--border); cursor: pointer;
+  font-family: inherit; padding: 9px 12px; border-radius: 9px;
+  display: flex; align-items: center; justify-content: center; gap: 6px;
+  transition: background 0.15s, border-color 0.15s, transform 0.12s;
+  width: 100%;
+}
+.topup-btn:hover { background: var(--bg-secondary); border-color: var(--border-strong); transform: translateY(-1px); }
+.topup-btn:active { transform: translateY(0) scale(0.98); }
+.account-card.owes .topup-btn { background: #DC2626; border-color: #DC2626; color: white; }
+.account-card.owes .topup-btn:hover { background: #B91C1C; }
+
+.sell-form {
+  display: none; flex-direction: column; gap: 10px;
+  margin-top: 8px; padding-top: 12px; border-top: 0.5px solid var(--border);
+  animation: slideDown 0.25s ease;
+}
+.account-card.editing .sell-form { display: flex; }
+.account-card.editing .topup-btn { display: none; }
+@keyframes slideDown { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: translateY(0); } }
+
+.sell-form-label {
+  font-size: 10px; font-weight: 600; color: var(--text-secondary);
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.sell-presets {
+  display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 4px;
+}
+.preset-btn {
+  font-family: inherit; background: var(--bg-secondary);
+  border: 0.5px solid var(--border); border-radius: 7px;
+  padding: 8px 4px; font-size: 12px; font-weight: 600;
+  color: var(--text-primary); cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  min-width: 0;
+}
+.preset-btn:hover { background: var(--bg-tertiary); }
+.preset-btn.active { background: var(--acc-color); border-color: var(--acc-color); color: white; }
+
+.sell-custom {
+  width: 100%; font-family: inherit;
+  background: var(--bg-primary); border: 0.5px solid var(--border);
+  border-radius: 7px; padding: 8px 10px; font-size: 13px;
+  color: var(--text-primary); min-width: 0;
+}
+.sell-custom:focus { outline: none; border-color: var(--acc-color); box-shadow: 0 0 0 2px color-mix(in srgb, var(--acc-color) 20%, transparent); }
+
+.sell-summary {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 11px; color: var(--text-secondary);
+  background: var(--bg-secondary); border-radius: 7px;
+  padding: 7px 10px; gap: 6px;
+}
+.sell-summary strong { color: var(--text-primary); font-weight: 600; font-variant-numeric: tabular-nums; }
+
+.sell-actions { display: grid; grid-template-columns: 1fr 1.6fr; gap: 6px; }
+.btn-cancel, .btn-confirm {
+  font-family: inherit; padding: 8px 10px; border-radius: 8px;
+  font-size: 12px; font-weight: 600; cursor: pointer;
+  border: 0.5px solid transparent; min-width: 0;
+  transition: background 0.15s, transform 0.12s;
+}
+.btn-cancel { background: var(--bg-secondary); border-color: var(--border); color: var(--text-primary); }
+.btn-cancel:hover { background: var(--bg-tertiary); }
+.btn-confirm { background: var(--acc-color); color: white; }
+.btn-confirm:hover:not(:disabled) { transform: translateY(-1px); filter: brightness(1.05); }
+.btn-confirm:disabled { opacity: 0.4; cursor: not-allowed; }
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.add-guest-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-family: inherit;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  background: var(--bg-secondary);
+  border: 0.5px solid var(--border);
+  border-radius: 999px;
+  padding: 7px 14px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s, transform 0.12s;
+}
+.add-guest-btn:hover { background: var(--bg-tertiary); border-color: var(--border-strong); transform: translateY(-1px); }
+.add-guest-btn:active { transform: translateY(0) scale(0.98); }
+.add-guest-btn i { font-size: 15px; }
+
+.guest-panel {
+  display: none;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--bg-secondary);
+  border: 0.5px solid var(--border);
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 1.5rem;
+  animation: slideDown 0.25s ease;
+}
+.guest-panel.open { display: flex; }
+.guest-panel-label {
+  font-size: 10px; font-weight: 600; color: var(--text-secondary);
+  text-transform: uppercase; letter-spacing: 0.5px;
+}
+.guest-panel-row { display: flex; gap: 6px; flex-wrap: wrap; }
+.guest-input {
+  flex: 1 1 220px;
+  font-family: inherit;
+  background: var(--bg-primary);
+  border: 0.5px solid var(--border);
+  border-radius: 8px;
+  padding: 9px 12px;
+  font-size: 13px;
+  color: var(--text-primary);
+  min-width: 0;
+}
+.guest-input:focus { outline: none; border-color: #1D9E75; box-shadow: 0 0 0 2px rgba(29, 158, 117, 0.2); }
+.guest-btn-cancel, .guest-btn-confirm {
+  font-family: inherit; padding: 9px 14px; border-radius: 8px;
+  font-size: 12px; font-weight: 600; cursor: pointer;
+  border: 0.5px solid transparent;
+  transition: background 0.15s, transform 0.12s;
+}
+.guest-btn-cancel { background: var(--bg-primary); border-color: var(--border); color: var(--text-primary); }
+.guest-btn-cancel:hover { background: var(--bg-tertiary); }
+.guest-btn-confirm { background: #1D9E75; color: white; }
+.guest-btn-confirm:hover:not(:disabled) { transform: translateY(-1px); filter: brightness(1.05); }
+.guest-btn-confirm:disabled { opacity: 0.4; cursor: not-allowed; }
+.guest-panel-hint { font-size: 11px; color: var(--text-tertiary); line-height: 1.5; }
+
+.guest-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 0.5px solid var(--border);
+  border-radius: 4px;
+  padding: 2px 6px;
+  flex-shrink: 0;
+}
+.guest-chip i { font-size: 11px; }
+
+.guest-input.guest-pin { flex: 0 1 120px; font-variant-numeric: tabular-nums; letter-spacing: 2px; }
+
+.recent-section { margin-bottom: 1.5rem; }
+.recent-label {
+  font-size: 11px; font-weight: 600; color: var(--text-secondary);
+  text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px;
+  display: flex; align-items: center; gap: 6px;
+}
+.recent-label i { font-size: 13px; }
+.recent-list { display: flex; flex-wrap: wrap; gap: 6px; }
+.recent-chip {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: var(--bg-secondary);
+  border: 0.5px solid var(--border);
+  border-radius: 999px;
+  padding: 5px 12px 5px 9px;
+  font-size: 12px;
+  color: var(--text-primary);
+  font-weight: 500;
+  white-space: nowrap;
+}
+.recent-chip .dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+.recent-chip .time { color: var(--text-tertiary); font-variant-numeric: tabular-nums; }
+
+.card-actions { display: grid; grid-template-columns: 1fr 42px; gap: 6px; margin-top: 6px; }
+.card-actions .topup-btn { margin-top: 0; }
+.adjust-btn {
+  font-family: inherit; font-size: 14px;
+  color: var(--text-secondary); background: var(--bg-primary);
+  border: 0.5px solid var(--border); cursor: pointer;
+  border-radius: 9px; display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s, border-color 0.15s, color 0.15s;
+}
+.adjust-btn:hover { background: var(--bg-secondary); border-color: var(--border-strong); color: var(--text-primary); }
+
+.adjust-form {
+  display: none; flex-direction: column; gap: 10px;
+  margin-top: 8px; padding-top: 12px; border-top: 0.5px solid var(--border);
+  animation: slideDown 0.25s ease;
+}
+.account-card.adjusting .adjust-form { display: flex; }
+.account-card.adjusting .card-actions,
+.account-card.editing .card-actions { display: none; }
+.adjust-summary {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 11px; color: var(--text-secondary);
+  background: var(--bg-secondary); border-radius: 7px;
+  padding: 7px 10px; gap: 6px;
+}
+.adjust-summary strong { color: var(--text-primary); font-weight: 600; font-variant-numeric: tabular-nums; }
+.adjust-summary .neg { color: #DC2626; }
+.adjust-summary .pos { color: #1D9E75; }
+
+.toast {
+  position: fixed; top: 14px; left: 50%;
+  transform: translateX(-50%) translateY(-60px);
+  background: var(--text-primary); color: var(--bg-primary);
+  padding: 11px 20px; border-radius: 999px;
+  font-size: 13px; font-weight: 500; opacity: 0;
+  transition: opacity 0.25s, transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  pointer-events: none; z-index: 10000; white-space: nowrap;
+  display: flex; align-items: center; gap: 8px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+.toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
+.toast.error { background: #DC2626; color: white; }
+.toast i { font-size: 14px; }
+
+.empty-state {
+  text-align: center; padding: 60px 20px; color: var(--text-secondary);
+}
+.empty-state i { font-size: 40px; color: var(--text-tertiary); margin-bottom: 12px; }
+
+.pin-overlay {
+  display: none; position: fixed; inset: 0; z-index: 11000;
+  background: rgba(0,0,0,0.45);
+  align-items: center; justify-content: center; padding: 20px;
+}
+.pin-overlay.open { display: flex; }
+.pin-modal {
+  background: var(--bg-primary); border: 0.5px solid var(--border);
+  border-radius: 16px; padding: 22px; width: 100%; max-width: 320px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  display: flex; flex-direction: column; gap: 10px;
+  animation: slideDown 0.25s ease;
+}
+.pin-modal-title { font-size: 16px; font-weight: 600; display: flex; align-items: center; gap: 8px; letter-spacing: -0.2px; }
+.pin-modal-title i { color: var(--text-secondary); font-size: 18px; }
+.pin-modal-sub { font-size: 12px; color: var(--text-secondary); }
+.pin-modal-input {
+  font-family: inherit; font-size: 22px; letter-spacing: 8px; text-align: center;
+  padding: 12px; border-radius: 10px; border: 0.5px solid var(--border);
+  background: var(--bg-secondary); color: var(--text-primary);
+  font-variant-numeric: tabular-nums; margin-top: 4px;
+}
+.pin-modal-input:focus { outline: none; border-color: var(--text-secondary); }
+.pin-modal-error { font-size: 12px; color: #DC2626; min-height: 15px; }
+.pin-modal-actions { display: grid; grid-template-columns: 1fr 1.4fr; gap: 8px; }
+#pinConfirm { background: #1D9E75; color: white; }
+#pinConfirm:hover { filter: brightness(1.05); transform: translateY(-1px); }
+
+.sr-only {
+  position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+}
+</style>
+</head>
+<body>
+
+<div class="admin">
+  <h1 class="sr-only">Credits admin dashboard.</h1>
+
+  <div class="toast" id="toast">
+    <i class="ti ti-check" id="toastIcon"></i>
+    <span id="toastText">Done</span>
+  </div>
+
+  <div class="pin-overlay" id="pinOverlay">
+    <div class="pin-modal">
+      <div class="pin-modal-title"><i class="ti ti-lock"></i> Reception PIN</div>
+      <div class="pin-modal-sub">Enter the PIN to confirm credit changes</div>
+      <input type="password" class="pin-modal-input" id="pinInput"
+             maxlength="12" inputmode="numeric" autocomplete="off" placeholder="••••" />
+      <div class="pin-modal-error" id="pinError"></div>
+      <div class="pin-modal-actions">
+        <button class="btn-cancel" id="pinCancel">Cancel</button>
+        <button class="btn-confirm" id="pinConfirm">Unlock</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="admin-header">
+    <div>
+      <div class="admin-title">
+        <i class="ti ti-coin"></i>
+        Credit accounts
+      </div>
+      <div class="admin-sub">Sold at reception · consumed via the kitchen tablet</div>
+    </div>
+    <div class="header-actions">
+      <button class="add-guest-btn" id="addGuestBtn">
+        <i class="ti ti-user-plus"></i>
+        Add guest
+      </button>
+      <div class="live-pill" id="livePill">
+        <span class="live-dot"></span>
+        <span id="liveStatus">Connecting…</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="guest-panel" id="guestPanel">
+    <div class="guest-panel-label">New guest account</div>
+    <div class="guest-panel-row">
+      <input type="text" id="guestName" class="guest-input"
+             placeholder="Guest name — e.g. Sam (visitor)" maxlength="40" />
+      <input type="text" id="guestPin" class="guest-input guest-pin"
+             placeholder="4-digit PIN" maxlength="4" inputmode="numeric" autocomplete="off" />
+      <button class="guest-btn-cancel" id="guestCancel">Cancel</button>
+      <button class="guest-btn-confirm" id="guestConfirm" disabled>Create guest</button>
+    </div>
+    <div class="guest-panel-hint">
+      Guests show up on the kitchen tablet within a minute and confirm their
+      coffees with this PIN. To remove one, delete their row in the
+      <strong>Guests</strong> tab of the spreadsheet.
+    </div>
+  </div>
+
+  <div class="recent-section" id="recentSection" style="display:none;">
+    <div class="recent-label"><i class="ti ti-clock"></i> Recent coffees</div>
+    <div class="recent-list" id="recentList"></div>
+  </div>
+
+  <div class="admin-kpis" id="kpis"></div>
+  <div class="admin-grid" id="grid">
+    <div class="empty-state" style="grid-column: 1 / -1;">
+      <i class="ti ti-loader"></i>
+      <div>Loading accounts…</div>
+    </div>
+  </div>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════════
+// EDIT THIS: paste your Apps Script Web App URL here
+// ═══════════════════════════════════════════════════════════════
+const WEB_APP_URL = 'https://script.google.com/macros/s/AKfycbw_Nleh5HTo-hJvbuvCBzvjoHNF0F3mgZiUP21bzWPPESqNO6U05_YUNe8sxsyFU8jzEg/exec';
+
+let state = null;     // last fetched state from backend
+const formState = {}; // per-company form values, persists across re-renders
+
+async function fetchState() {
+  const res = await fetch(WEB_APP_URL);
+  const data = await res.json();
+  if (!data.ok) throw new Error(data.error || 'Bad response');
+  return data;
+}
+
+async function sendSale(company, cups, pin) {
+  const res = await fetch(WEB_APP_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ type: 'sale', company: company, cups: cups, pin: pin })
+  });
+  const data = await res.json();
+  if (!data.ok) throw new Error(data.error || 'Bad response');
+  return data;
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+async function sendGuest(name, pin) {
+  const res = await fetch(WEB_APP_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ type: 'addGuest', name: name, pin: pin })
+  });
+  const data = await res.json();
+  if (!data.ok) throw new Error(data.error || 'Bad response');
+  return data;
+}
+
+// ── Add guest panel ─────────────────────────────────────────────
+const guestPanel = document.getElementById('guestPanel');
+const guestNameInput = document.getElementById('guestName');
+const guestPinInput = document.getElementById('guestPin');
+const guestConfirmBtn = document.getElementById('guestConfirm');
+
+function guestFormValid() {
+  return guestNameInput.value.trim().length >= 2 &&
+         /^\d{4}$/.test(guestPinInput.value.trim());
+}
+
+function openGuestPanel() {
+  guestPanel.classList.add('open');
+  guestNameInput.value = '';
+  guestPinInput.value = '';
+  guestConfirmBtn.disabled = true;
+  guestNameInput.focus();
+}
+function closeGuestPanel() {
+  guestPanel.classList.remove('open');
+}
+
+document.getElementById('addGuestBtn').addEventListener('click', () => {
+  guestPanel.classList.contains('open') ? closeGuestPanel() : openGuestPanel();
+});
+document.getElementById('guestCancel').addEventListener('click', closeGuestPanel);
+[guestNameInput, guestPinInput].forEach(el => {
+  el.addEventListener('input', () => {
+    guestConfirmBtn.disabled = !guestFormValid();
+  });
+  el.addEventListener('keydown', e => {
+    if (e.key === 'Enter' && !guestConfirmBtn.disabled) confirmGuest();
+  });
+});
+guestConfirmBtn.addEventListener('click', confirmGuest);
+
+async function confirmGuest() {
+  if (!guestFormValid()) return;
+  const name = guestNameInput.value.trim();
+  const pin = guestPinInput.value.trim();
+  guestConfirmBtn.disabled = true;
+  try {
+    await sendGuest(name, pin);
+    closeGuestPanel();
+    showToast('Guest "' + name + '" created — appears on the tablet within a minute', { icon: 'user-check', duration: 3500 });
+    await refresh();
+  } catch (err) {
+    guestConfirmBtn.disabled = false;
+    showToast(String(err.message || 'Could not create guest'), { icon: 'alert-triangle', error: true, duration: 3500 });
+    console.error(err);
+  }
+}
+
+function setLive(connected) {
+  const pill = document.getElementById('livePill');
+  const status = document.getElementById('liveStatus');
+  if (connected) {
+    pill.classList.remove('error');
+    status.textContent = 'Live · synced';
+  } else {
+    pill.classList.add('error');
+    status.textContent = 'Offline';
+  }
+}
+
+function showToast(text, opts) {
+  opts = opts || {};
+  const toast = document.getElementById('toast');
+  const icon = document.getElementById('toastIcon');
+  document.getElementById('toastText').textContent = text;
+  icon.className = 'ti ti-' + (opts.icon || 'check');
+  toast.classList.toggle('error', !!opts.error);
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), opts.duration || 2400);
+}
+
+function statusOf(balance) {
+  if (balance < 0) return 'owes';
+  if (balance === 0) return 'even';
+  if (balance <= 20) return 'low';
+  return 'ok';
+}
+
+function relativeDate(iso) {
+  if (!iso) return 'never';
+  const d = new Date(iso);
+  const days = Math.floor((Date.now() - d.getTime()) / 86400000);
+  if (days <= 0) return 'today';
+  if (days === 1) return 'yesterday';
+  if (days < 7) return days + 'd ago';
+  if (days < 30) return Math.floor(days / 7) + 'w ago';
+  return Math.floor(days / 30) + 'mo ago';
+}
+
+function money(n, currency) {
+  return (currency || 'NZ$') + n.toFixed(2);
+}
+
+// "today 14:32" / "yesterday 09:15" / "28/05 16:40"
+function tapTimeFmt(iso) {
+  if (!iso) return 'never';
+  const d = new Date(iso);
+  const pad = n => String(n).padStart(2, '0');
+  const hm = pad(d.getHours()) + ':' + pad(d.getMinutes());
+  const now = new Date();
+  const today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const that = new Date(d.getFullYear(), d.getMonth(), d.getDate());
+  const diffDays = Math.round((today - that) / 86400000);
+  if (diffDays === 0) return 'today ' + hm;
+  if (diffDays === 1) return 'yesterday ' + hm;
+  return pad(d.getDate()) + '/' + pad(d.getMonth() + 1) + ' ' + hm;
+}
+
+async function sendAdjust(company, cups, pin) {
+  const res = await fetch(WEB_APP_URL, {
+    method: 'POST',
+    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+    body: JSON.stringify({ type: 'adjust', company: company, cups: cups, pin: pin })
+  });
+  const data = await res.json();
+  if (!data.ok) throw new Error(data.error || 'Bad response');
+  return data;
+}
+
+// ── Reception PIN gate ──────────────────────────────────────────
+// The PIN is held in memory only (never localStorage), cleared on reload
+// or when the backend rejects it. We only prompt when the backend says the
+// gate is on (state.receptionPinRequired); otherwise sales/adjusts pass null.
+let receptionPin = null;
+let pinResolve = null, pinReject = null;
+
+function isPinError(err) {
+  return /pin/i.test(String(err && err.message));
+}
+
+function ensureReceptionPin() {
+  return new Promise((resolve, reject) => {
+    if (!state || !state.receptionPinRequired) return resolve(null); // gate off
+    if (receptionPin) return resolve(receptionPin);
+    pinResolve = resolve;
+    pinReject = reject;
+    openPinModal();
+  });
+}
+
+function openPinModal(errorMsg) {
+  const ov = document.getElementById('pinOverlay');
+  const input = document.getElementById('pinInput');
+  document.getElementById('pinError').textContent = errorMsg || '';
+  input.value = '';
+  ov.classList.add('open');
+  setTimeout(() => input.focus(), 50);
+}
+
+function closePinModal() {
+  document.getElementById('pinOverlay').classList.remove('open');
+}
+
+function submitPin() {
+  const val = document.getElementById('pinInput').value.trim();
+  if (!val) return;
+  closePinModal();
+  receptionPin = val; // cache for the session
+  const r = pinResolve; pinResolve = null; pinReject = null;
+  if (r) r(val);
+}
+
+function cancelPin() {
+  closePinModal();
+  const rj = pinReject; pinResolve = null; pinReject = null;
+  if (rj) rj(new Error('cancelled'));
+}
+
+document.getElementById('pinConfirm').addEventListener('click', submitPin);
+document.getElementById('pinCancel').addEventListener('click', cancelPin);
+document.getElementById('pinInput').addEventListener('keydown', e => {
+  if (e.key === 'Enter') submitPin();
+  else if (e.key === 'Escape') cancelPin();
+});
+
+// ── Balance adjustments ─────────────────────────────────────────
+const adjustState = {}; // per-company typed value, survives re-renders
+
+function accountByName(name) {
+  return state ? state.accounts.find(a => a.name === name) : null;
+}
+
+function openAdjust(name, reset) {
+  if (reset === undefined) reset = true;
+  closeForm(name);
+  const card = document.querySelector('.account-card[data-company="' + CSS.escape(name) + '"]');
+  const acc = accountByName(name);
+  if (!card || !acc) return;
+  card.classList.add('adjusting');
+  if (reset || adjustState[name] === undefined) adjustState[name] = '';
+  const input = card.querySelector('.js-adjust-input');
+  input.value = adjustState[name];
+  updateAdjustSummary(card, acc);
+  if (reset) input.focus();
+}
+
+function closeAdjust(name) {
+  const card = document.querySelector('.account-card[data-company="' + CSS.escape(name) + '"]');
+  if (card) card.classList.remove('adjusting');
+  delete adjustState[name];
+}
+
+function updateAdjustSummary(card, acc) {
+  const raw = card.querySelector('.js-adjust-input').value;
+  const diffEl = card.querySelector('.js-adjust-diff');
+  const confirmBtn = card.querySelector('.js-adjust-confirm');
+  const newBal = parseInt(raw, 10);
+  if (raw === '' || isNaN(newBal)) {
+    diffEl.textContent = '—';
+    diffEl.className = 'js-adjust-diff';
+    confirmBtn.disabled = true;
+    return;
+  }
+  const diff = newBal - acc.balance;
+  diffEl.textContent = (diff > 0 ? '+' : '') + diff + ' cups';
+  diffEl.className = 'js-adjust-diff ' + (diff < 0 ? 'neg' : diff > 0 ? 'pos' : '');
+  confirmBtn.disabled = diff === 0;
+}
+
+async function confirmAdjust(name) {
+  const card = document.querySelector('.account-card[data-company="' + CSS.escape(name) + '"]');
+  const acc = accountByName(name);
+  if (!card || !acc) return;
+  const newBal = parseInt(card.querySelector('.js-adjust-input').value, 10);
+  if (isNaN(newBal)) return;
+  const diff = newBal - acc.balance;
+  if (diff === 0) return;
+  let pin;
+  try { pin = await ensureReceptionPin(); }
+  catch (e) { return; } // user cancelled the PIN prompt
+  try {
+    await sendAdjust(name, diff, pin);
+    closeAdjust(name);
+    showToast(name + ': balance set to ' + newBal + ' (' + (diff > 0 ? '+' : '') + diff + ' cups)', { icon: 'pencil', duration: 3000 });
+    await refresh();
+  } catch (err) {
+    if (isPinError(err)) {
+      receptionPin = null;
+      showToast('Wrong PIN — no change made', { icon: 'lock', error: true, duration: 3000 });
+    } else {
+      showToast('Adjustment failed — try again', { icon: 'alert-triangle', error: true, duration: 3000 });
+    }
+    console.error(err);
+  }
+}
+
+// ── Recent coffees feed ─────────────────────────────────────────
+function renderRecent() {
+  const section = document.getElementById('recentSection');
+  const list = document.getElementById('recentList');
+  const taps = (state && state.recentTaps) || [];
+  if (!taps.length) {
+    section.style.display = 'none';
+    return;
+  }
+  section.style.display = '';
+  list.innerHTML = taps.map(t =>
+    '<span class="recent-chip">' +
+      '<span class="dot" style="background:' + t.color + '"></span>' +
+      escapeHtml(t.company) +
+      '<span class="time">' + tapTimeFmt(t.tsIso) + '</span>' +
+    '</span>'
+  ).join('');
+}
+
+function renderKpis() {
+  if (!state) return;
+  const t = state.totals;
+  const accOwes = state.accounts.filter(a => a.balance < 0).length;
+  const accEven = state.accounts.filter(a => a.balance === 0).length;
+  const accLow = state.accounts.filter(a => a.balance > 0 && a.balance <= 20).length;
+  const attention = accOwes + accEven + accLow;
+  const usedPct = t.purchased > 0 ? Math.round(t.consumed / t.purchased * 100) : 0;
+
+  let cls = '';
+  if (accOwes > 0) cls = 'danger';
+  else if (attention > 0) cls = 'warning';
+
+  document.getElementById('kpis').innerHTML =
+    '<div class="kpi-card">' +
+      '<div class="kpi-label">Available</div>' +
+      '<div class="kpi-value">' + t.available + '</div>' +
+      '<div class="kpi-sub">cups in credit</div>' +
+    '</div>' +
+    '<div class="kpi-card">' +
+      '<div class="kpi-label">Sold</div>' +
+      '<div class="kpi-value">' + t.purchased + '</div>' +
+      '<div class="kpi-sub">' + money(t.purchased * state.costPerCup, state.currency) + ' lifetime</div>' +
+    '</div>' +
+    '<div class="kpi-card">' +
+      '<div class="kpi-label">Consumed</div>' +
+      '<div class="kpi-value">' + t.consumed + '</div>' +
+      '<div class="kpi-sub">' + usedPct + '% of sold</div>' +
+    '</div>' +
+    '<div class="kpi-card ' + cls + '">' +
+      '<div class="kpi-label">To invoice</div>' +
+      '<div class="kpi-value">' + money(t.toInvoice, state.currency) + '</div>' +
+      '<div class="kpi-sub">' + accOwes + ' owe · ' + accEven + ' even · ' + accLow + ' low</div>' +
+    '</div>';
+}
+
+function buildCard(acc) {
+  const st = statusOf(acc.balance);
+  const usedPct = acc.purchased > 0 ? Math.min(100, Math.round(acc.consumed / acc.purchased * 100)) : 0;
+  let badge = '';
+  if (st === 'owes') badge = '<div class="account-status owes">Owes</div>';
+  else if (st === 'even') badge = '<div class="account-status even">Even</div>';
+  else if (st === 'low') badge = '<div class="account-status low">Low</div>';
+
+  let progressClass = '';
+  if (usedPct >= 100) progressClass = 'danger';
+  else if (usedPct >= 80) progressClass = 'warning';
+
+  const balDisplay = acc.balance < 0 ? '−' + Math.abs(acc.balance) : String(acc.balance);
+  const balLabel = acc.balance < 0 ? 'cups owed' : acc.balance === 0 ? 'cups left' : 'cups available';
+
+  const card = document.createElement('div');
+  card.className = 'account-card ' + (st === 'ok' ? '' : st);
+  card.style.setProperty('--acc-color', acc.color);
+  card.dataset.company = acc.name;
+
+  card.innerHTML =
+    '<div class="account-header">' +
+      '<div class="account-dot"></div>' +
+      '<div class="account-name">' + escapeHtml(acc.name) + '</div>' +
+      (acc.isGuest ? '<div class="guest-chip"><i class="ti ti-user"></i>Guest</div>' : '') +
+      badge +
+    '</div>' +
+    '<div class="account-balance">' +
+      '<div class="account-balance-num ' + (acc.balance < 0 ? 'owes' : '') + '">' + balDisplay + '</div>' +
+      '<div class="account-balance-label">' + balLabel + '</div>' +
+    '</div>' +
+    '<div class="progress-track">' +
+      '<div class="progress-fill ' + progressClass + '" style="width:' + usedPct + '%"></div>' +
+    '</div>' +
+    '<div class="account-meta">' +
+      '<span><strong>' + acc.consumed + '</strong> of <strong>' + acc.purchased + '</strong> used</span>' +
+      '<span>Last sale: ' + relativeDate(acc.lastSaleIso) + '</span>' +
+    '</div>' +
+    '<div class="account-meta">' +
+      '<span>Last coffee: <strong>' + tapTimeFmt(acc.lastTapIso) + '</strong></span>' +
+    '</div>' +
+    '<div class="card-actions">' +
+      '<button class="topup-btn js-open">' +
+        '<i class="ti ti-plus"></i>' +
+        (st === 'owes' ? 'Sell credits now' : 'Sell credits') +
+      '</button>' +
+      '<button class="adjust-btn js-adjust-open" title="Adjust balance"><i class="ti ti-pencil"></i></button>' +
+    '</div>' +
+    '<div class="sell-form">' +
+      '<div class="sell-form-label">Quick add</div>' +
+      '<div class="sell-presets">' +
+        '<button class="preset-btn" data-amount="25">+25</button>' +
+        '<button class="preset-btn" data-amount="50">+50</button>' +
+        '<button class="preset-btn" data-amount="100">+100</button>' +
+        '<button class="preset-btn" data-amount="200">+200</button>' +
+      '</div>' +
+      '<div class="sell-form-label">Or custom amount</div>' +
+      '<input type="number" class="sell-custom" placeholder="e.g. 75" min="1" />' +
+      '<div class="sell-summary">' +
+        '<span><strong class="js-add-amount">0</strong> cups</span>' +
+        '<span>Total: <strong class="js-cost">' + money(0, state.currency) + '</strong></span>' +
+      '</div>' +
+      '<div class="sell-actions">' +
+        '<button class="btn-cancel js-cancel">Cancel</button>' +
+        '<button class="btn-confirm js-confirm" disabled>Confirm sale</button>' +
+      '</div>' +
+    '</div>' +
+    '<div class="adjust-form">' +
+      '<div class="sell-form-label">Set new balance (current: ' + acc.balance + ')</div>' +
+      '<input type="number" class="sell-custom js-adjust-input" placeholder="e.g. 0" step="1" />' +
+      '<div class="adjust-summary">' +
+        '<span>Adjustment: <strong class="js-adjust-diff">—</strong></span>' +
+        '<span class="js-adjust-note">logged in the Credits sheet</span>' +
+      '</div>' +
+      '<div class="sell-actions">' +
+        '<button class="btn-cancel js-adjust-cancel">Cancel</button>' +
+        '<button class="btn-confirm js-adjust-confirm" disabled>Apply adjustment</button>' +
+      '</div>' +
+    '</div>';
+
+  card.querySelector('.js-open').addEventListener('click', () => openForm(acc.name));
+  card.querySelector('.js-cancel').addEventListener('click', () => closeForm(acc.name));
+  card.querySelector('.js-confirm').addEventListener('click', () => confirmSale(acc.name));
+  card.querySelector('.js-adjust-open').addEventListener('click', () => openAdjust(acc.name));
+  card.querySelector('.js-adjust-cancel').addEventListener('click', () => closeAdjust(acc.name));
+  card.querySelector('.js-adjust-confirm').addEventListener('click', () => confirmAdjust(acc.name));
+  card.querySelector('.js-adjust-input').addEventListener('input', () => {
+    adjustState[acc.name] = card.querySelector('.js-adjust-input').value;
+    updateAdjustSummary(card, acc);
+  });
+  card.querySelector('.sell-custom').addEventListener('input', e => {
+    formState[acc.name] = { selected: 0, custom: e.target.value };
+    card.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+    updateSummary(card, acc.name);
+  });
+  card.querySelectorAll('.preset-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      card.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      card.querySelector('.sell-custom').value = '';
+      formState[acc.name] = { selected: parseInt(btn.dataset.amount), custom: '' };
+      updateSummary(card, acc.name);
+    });
+  });
+  return card;
+}
+
+function getAmount(name) {
+  const fs = formState[name] || {};
+  return fs.selected || parseInt(fs.custom) || 0;
+}
+
+function updateSummary(card, name) {
+  const amount = getAmount(name);
+  card.querySelector('.js-add-amount').textContent = amount;
+  card.querySelector('.js-cost').textContent = money(amount * state.costPerCup, state.currency);
+  card.querySelector('.js-confirm').disabled = amount <= 0;
+}
+
+function openForm(name, reset) {
+  if (reset === undefined) reset = true;
+  document.querySelectorAll('.account-card.editing').forEach(c => {
+    if (c.dataset.company !== name) c.classList.remove('editing');
+  });
+  const card = document.querySelector('.account-card[data-company="' + CSS.escape(name) + '"]');
+  if (!card) return;
+  card.classList.add('editing');
+  card.classList.remove('adjusting');
+  if (reset || !formState[name]) formState[name] = { selected: 0, custom: '' };
+  const fs = formState[name];
+  card.querySelector('.sell-custom').value = fs.custom || '';
+  card.querySelectorAll('.preset-btn').forEach(b => {
+    b.classList.toggle('active', parseInt(b.dataset.amount) === fs.selected);
+  });
+  updateSummary(card, name);
+}
+
+function closeForm(name) {
+  const card = document.querySelector('.account-card[data-company="' + CSS.escape(name) + '"]');
+  if (card) card.classList.remove('editing');
+  delete formState[name];
+}
+
+async function confirmSale(name) {
+  const amount = getAmount(name);
+  if (amount <= 0) return;
+  let pin;
+  try { pin = await ensureReceptionPin(); }
+  catch (e) { return; } // user cancelled the PIN prompt
+  try {
+    await sendSale(name, amount, pin);
+    closeForm(name);
+    showToast('+' + amount + ' cups sold to ' + name);
+    await refresh();
+  } catch (err) {
+    if (isPinError(err)) {
+      receptionPin = null; // forget the bad PIN so the next try re-prompts
+      showToast('Wrong PIN — sale not made', { icon: 'lock', error: true, duration: 3000 });
+    } else {
+      showToast('Sale failed — try again', { icon: 'alert-triangle', error: true, duration: 3000 });
+    }
+    console.error(err);
+  }
+}
+
+function renderGrid() {
+  const editing = Array.from(document.querySelectorAll('.account-card.editing'))
+    .map(c => c.dataset.company);
+  const adjusting = Array.from(document.querySelectorAll('.account-card.adjusting'))
+    .map(c => c.dataset.company);
+
+  const sorted = state.accounts.slice().sort((a, b) => a.balance - b.balance);
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  sorted.forEach(acc => grid.appendChild(buildCard(acc)));
+
+  editing.forEach(name => openForm(name, false));
+  adjusting.forEach(name => openAdjust(name, false));
+}
+
+async function refresh() {
+  try {
+    state = await fetchState();
+    setLive(true);
+    renderKpis();
+    renderRecent();
+    renderGrid();
+  } catch (err) {
+    setLive(false);
+    console.error(err);
+  }
+}
+
+if (WEB_APP_URL === 'PASTE_YOUR_WEB_APP_URL_HERE') {
+  document.getElementById('grid').innerHTML =
+    '<div class="empty-state" style="grid-column: 1 / -1;">' +
+      '<i class="ti ti-alert-triangle"></i>' +
+      '<div>Paste your Web App URL into dashboard.html</div>' +
+      '<div style="font-size:12px; margin-top:8px;">Look for <code>const WEB_APP_URL</code> in the script tag.</div>' +
+    '</div>';
+  setLive(false);
+} else {
+  refresh();
+  setInterval(refresh, 5000);
+}
+</script>
+</body>
+</html>

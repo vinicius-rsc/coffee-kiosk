@@ -1,0 +1,7 @@
+# NUNCA versionar o backend nem segredos neste repo (ele é só o frontend)
+coffee-kiosk.gs
+coffee-kiosk-LIVE.gs
+coffee-kiosk_gs.txt
+*.gs
+PINS.md
+.DS_Store
