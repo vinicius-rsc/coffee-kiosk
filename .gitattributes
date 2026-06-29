@@ -1,0 +1,13 @@
+# O projeto roda em container Linux (nginx/alpine). Normaliza tudo para LF
+# no repositorio e na working copy — acaba com os avisos LF/CRLF no Windows.
+* text=auto eol=lf
+
+# Arquivos binarios: o git nao deve mexer em quebras de linha.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.webp binary
+*.woff binary
+*.woff2 binary

@@ -3,6 +3,6 @@
 .DS_Store
 *.md
 # NUNCA inclua segredos no contexto de build / no repo:
-coffee-kiosk.gs
+*.gs
 coffee-kiosk_gs.txt
 PINS.md
